@@ -17,7 +17,9 @@ The default (pre-forked) configuration of this repository contains 3 major direc
 
 </br>  
 ## _Want to Fork?_    
-Please feel free to use my code as a reference for your own work. With that said, at this time I am requesting that you do not _copy_ this code. Thank you for your understanding and happy hacking!
+Please feel free to use my code as a reference for your own work. With that said, at this time I am requesting that you do not _copy_ this code. Thank you for your understanding and happy hacking!  
+
+You might also want to consider forking from the original repository like I did. If you'd like to do so, go to the link in the description part of this README file.
 </br></br>
 
 ## _Got Questions?_ 
