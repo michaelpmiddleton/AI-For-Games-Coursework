@@ -20,6 +20,7 @@
 #include "Timer.h"
 #include "KinematicUnit.h"
 #include "PlayerMoveToMessage.h"
+#include "UnitManager.h"
 
 Game* gpGame = NULL;
 
@@ -176,6 +177,10 @@ bool Game::init()
 	{
 		pEnemyArrow = mpSpriteManager->createAndManageSprite( AI_ICON_SPRITE_ID, pAIBuffer, 0, 0, pAIBuffer->getWidth(), pAIBuffer->getHeight() );
 	}
+
+
+	// UnitManager -> LoadSprites (pArrowSprite, pEnemyArrow);
+
 
 	//setup units
 	Vector2D pos( 0.0f, 0.0f );
