@@ -4,6 +4,7 @@
 #include "PerformanceTracker.h"
 #include "Defines.h"
 #include "UnitManager.h"
+#include "InputManager.h"
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_audio.h>
