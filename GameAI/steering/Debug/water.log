@@ -1,3 +1,11 @@
-﻿DynamicArriveSteering.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
-  water.vcxproj -> C:\Users\Student\Documents\mmiddleton\hyperdev-ai-for-games\GameAI\steering\Debug\steering.exe
-  water.vcxproj -> C:\Users\Student\Documents\mmiddleton\hyperdev-ai-for-games\GameAI\steering\Debug\steering.pdb (Full PDB)
+﻿  main.cpp
+  UnitManager.cpp
+  PlayerMoveToMessage.cpp
+  KinematicWanderSteering.cpp
+  KinematicUnit.cpp
+  GraphicsSystem.cpp
+  GameMessageManager.cpp
+  Game.cpp
+  Generating Code...
+  water.vcxproj -> C:\Users\Student\Documents\mmiddleton\EGP-410\GameAI\steering\Debug\steering.exe
+  water.vcxproj -> C:\Users\Student\Documents\mmiddleton\EGP-410\GameAI\steering\Debug\steering.pdb (Full PDB)

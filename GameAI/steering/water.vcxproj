@@ -20,6 +20,7 @@
     <ClInclude Include="GraphicsBuffer.h" />
     <ClInclude Include="GraphicsBufferManager.h" />
     <ClInclude Include="GraphicsSystem.h" />
+    <ClInclude Include="UnitManager.h" />
     <ClInclude Include="Kinematic.h" />
     <ClInclude Include="KinematicArriveSteering.h" />
     <ClInclude Include="KinematicSeekSteering.h" />
@@ -46,6 +47,7 @@
     <ClCompile Include="KinematicWanderSteering.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerMoveToMessage.cpp" />
+    <ClCompile Include="UnitManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteManager.cpp" />
     <ClCompile Include="Steering.cpp" />
