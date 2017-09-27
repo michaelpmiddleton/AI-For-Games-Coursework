@@ -183,6 +183,7 @@ bool Game::init()
 	_um -> Init ();
 	
 	_im = new InputManager ();
+	_im -> LoadAssets (MESSAGE_MANAGER, GRAPHICS_SYSTEM, mpFont, _um);
 	////////////////////////////////////////////////////////////////////////////////
 
 	return true;
@@ -239,50 +240,14 @@ void Game::processLoop()
 	// Update units & player
 	_um -> Update (LOOP_TARGET_TIME/1000.0f, GRAPHICS_SYSTEM -> getBackBuffer ());
 
+	// Process messages:
 	mpMessageManager->processMessagesForThisframe();
 
 	// Process input
-	_im -> ProcessInput ();
+	mShouldExit = _im -> ProcessInput ();
 
-
-	//get input - should be moved someplace better
-	ALLEGRO_MOUSE_STATE mouseState;
-	al_get_mouse_state( &mouseState );
-
-	if( al_mouse_button_down( &mouseState, 1 ) )//left mouse click
-	{
-		Vector2D pos( mouseState.x, mouseState.y );
-		GameMessage* pMessage = new PlayerMoveToMessage( pos );
-		MESSAGE_MANAGER->addMessage( pMessage, 0 );
-	}
-
-
-
-	//all this should be moved to InputManager!!!
-	{
-		//get mouse state
-		ALLEGRO_MOUSE_STATE mouseState;
-		al_get_mouse_state( &mouseState );
-
-		//create mouse text
-		stringstream mousePos;
-		mousePos << mouseState.x << ":" << mouseState.y;
-
-		//write text at mouse position
-		al_draw_text( mpFont, al_map_rgb( 255, 255, 255 ), mouseState.x, mouseState.y, ALLEGRO_ALIGN_CENTRE, mousePos.str().c_str() );
-
-		mpGraphicsSystem->swap();
-
-		//get current keyboard state
-		ALLEGRO_KEYBOARD_STATE keyState;
-		al_get_keyboard_state( &keyState );
-
-		//if escape key was down then exit the loop
-		if( al_key_down( &keyState, ALLEGRO_KEY_ESCAPE ) )
-		{
-			mShouldExit = true;
-		}
-	}
+	// Check for empty _units in _um (Also a gameover)
+	mShouldExit = _um -> IsEmpty ();
 }
 
 bool Game::endLoop()

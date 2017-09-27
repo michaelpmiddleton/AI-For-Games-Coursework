@@ -6,19 +6,37 @@
 #ifndef INPUTMANAGER_H
 #define INPUTMANAGER_H
 
-class InputManager {
+#include <stdio.h>
+#include <sstream>
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_font.h>
+
+
+#include "Defines.h"
+#include "GraphicsSystem.h"
+#include "GameMessageManager.h"
+#include "PlayerMoveToMessage.h"
+
+#include "Vector2D.h"
+#include "UnitManager.h"
+#include "Trackable.h"
+
+class InputManager : public Trackable {
 	public:
-		InputManager ();			// Constructor
-
-		void Initialize ();			// Initialize needed components.
-		void LoadAssets ();			// Pulls in 
-		void ProcessInput ();		// Checks for input from keyboard/mouse.
-
-		std::stringstream GetMousePosition ();		// Return mouse position string.
+		void Initialize ();								// Initialize needed components.
+		void LoadAssets (GameMessageManager* gmm,
+			GraphicsSystem* gs,
+			ALLEGRO_FONT* af,
+			UnitManager* um);							// Pulls in the Game object's GameMessageManager to send them. 
+		bool ProcessInput ();							// Checks for input from keyboard/mouse.
 
 	private:
-		ALLEGRO_MOUSE_STATE _mouse;
-		ALLEGRO_KEYBOARD_STATE _keyboard;
+		GameMessageManager* _messageManager;
+		GraphicsSystem* _graphicsSystem;
+		ALLEGRO_FONT* _allegroFont;
+		UnitManager* _unitManager;
+
+		void _updateMouseText(ALLEGRO_MOUSE_STATE mouse);					// Updates the string denoting mouse position on the bottom 
 
 };
 

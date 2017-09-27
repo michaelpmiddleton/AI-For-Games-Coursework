@@ -64,6 +64,7 @@ class Game:public Trackable {
 		IDType mEnemyIconBufferID;
 
 		UnitManager* _um;
+		InputManager* _im;
 };
 
 float genRandomBinomial();//range -1:1 from "Artificial Intelligence for Games", Millington and Funge
