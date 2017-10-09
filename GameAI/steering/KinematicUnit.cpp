@@ -9,6 +9,7 @@
 #include "KinematicWanderSteering.h"
 #include "DynamicSeekSteering.h"
 #include "DynamicArriveSteering.h"
+#include "WanderSeekFlee.h"
 
 using namespace std;
 
@@ -118,3 +119,10 @@ void KinematicUnit::dynamicArrive( KinematicUnit* pTarget )
 	setSteering( pDynamicArriveSteering );
 }
 
+// MIDDLETON	///////////////////////////////////////////////////////////////////////////////////
+void KinematicUnit::wanderSeekFlee(KinematicUnit* pTarget, bool isFlee)
+{
+	WanderSeekFlee* _wanderSeekFlee = new WanderSeekFlee (this, gpGame -> getPlayerUnit (), isFlee);
+	setSteering (_wanderSeekFlee);
+}
+// ////////////////////////////////////////////////////////////////////////////////////////////////

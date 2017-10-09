@@ -6,5 +6,8 @@ todo.tasks
 *.obj
 
 # Directories:
-GameAI/steering/.vs/
+.vs/
+GameAI/steering/.vs/*
 GameAI/steering/Debug/
+
+LocalFiles/

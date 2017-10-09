@@ -21,6 +21,7 @@ class Timer;
 const IDType BACKGROUND_SPRITE_ID = 0;
 const IDType PLAYER_ICON_SPRITE_ID = 1;
 const IDType AI_ICON_SPRITE_ID = 2;
+const IDType WALL_SPRITE_ID = 3 ;
 
 const float LOOP_TARGET_TIME = 33.3f;//how long should each frame of execution take? 30fps = 33.3ms/frame
 
@@ -34,7 +35,7 @@ class Game:public Trackable {
 
 		//game loop
 		void beginLoop();
-		void processLoop();
+		bool processLoop();
 		bool endLoop();
 
 		inline GraphicsSystem* getGraphicsSystem() const { return mpGraphicsSystem; };
@@ -62,6 +63,10 @@ class Game:public Trackable {
 		IDType mBackgroundBufferID;
 		IDType mPlayerIconBufferID;
 		IDType mEnemyIconBufferID;
+		IDType bottomWallBufferID;
+		IDType topWallBufferID;
+		IDType rightWallBufferID;
+		IDType leftWallBufferID;
 
 		UnitManager* _um;
 		InputManager* _im;

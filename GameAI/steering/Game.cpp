@@ -154,9 +154,13 @@ bool Game::init()
 	mpMessageManager = new GameMessageManager();
 
 	//load buffers
-	mBackgroundBufferID = mpGraphicsBufferManager->loadBuffer("wallpaper.bmp");
-	mPlayerIconBufferID = mpGraphicsBufferManager->loadBuffer("arrow.bmp");
-	mEnemyIconBufferID = mpGraphicsBufferManager->loadBuffer("enemy-arrow.bmp");
+	mBackgroundBufferID = mpGraphicsBufferManager -> loadBuffer("wallpaper.bmp");
+	bottomWallBufferID = mpGraphicsBufferManager -> loadBuffer ("wallHor.bmp");
+	topWallBufferID = mpGraphicsBufferManager -> loadBuffer ("wallHor.bmp");
+	rightWallBufferID = mpGraphicsBufferManager-> loadBuffer ("wallVert.bmp");
+	leftWallBufferID = mpGraphicsBufferManager -> loadBuffer ("wallVert.bmp");
+	mPlayerIconBufferID = mpGraphicsBufferManager -> loadBuffer("arrow.bmp");
+	mEnemyIconBufferID = mpGraphicsBufferManager -> loadBuffer("enemy-arrow.bmp");
 	
 	//setup sprites
 	GraphicsBuffer* pBackGroundBuffer = mpGraphicsBufferManager->getBuffer( mBackgroundBufferID );
@@ -178,6 +182,23 @@ bool Game::init()
 	}
 	
 	// MIDDLETON CODE		////////////////////////////////////////////////////////
+	GraphicsBuffer* leftWallBuffer = mpGraphicsBufferManager -> getBuffer (leftWallBufferID);
+	if (leftWallBuffer != NULL)
+		mpSpriteManager -> createAndManageSprite (WALL_SPRITE_ID, leftWallBuffer, 0, 0, leftWallBuffer -> getWidth (), leftWallBuffer -> getHeight ());
+	
+	GraphicsBuffer* rightWallBuffer = mpGraphicsBufferManager -> getBuffer (rightWallBufferID);
+	if (rightWallBuffer != NULL)
+		mpSpriteManager -> createAndManageSprite (WALL_SPRITE_ID, rightWallBuffer, 1014, 0, rightWallBuffer -> getWidth (), rightWallBuffer -> getHeight ());
+
+	GraphicsBuffer* topWallBuffer = mpGraphicsBufferManager -> getBuffer (topWallBufferID);
+	if (topWallBuffer != NULL)
+		mpSpriteManager -> createAndManageSprite (WALL_SPRITE_ID, topWallBuffer, 0, 0, topWallBuffer -> getWidth (), topWallBuffer -> getHeight ());
+	
+	GraphicsBuffer* bottomWallBuffer = mpGraphicsBufferManager -> getBuffer (bottomWallBufferID);
+	if (bottomWallBuffer != NULL)
+		mpSpriteManager -> createAndManageSprite (WALL_SPRITE_ID, bottomWallBuffer, 0, 758, bottomWallBuffer -> getWidth (), bottomWallBuffer -> getHeight ());
+
+
 	_um = new UnitManager ();
 	_um -> LoadSprites (pArrowSprite, pEnemyArrow);
 	_um -> Init ();
@@ -198,6 +219,7 @@ void Game::cleanup()
 	mpLoopTimer = NULL;
 	delete mpMasterTimer;
 	mpMasterTimer = NULL;
+
 
 	//delete the graphics system
 	delete mpGraphicsSystem;
@@ -224,6 +246,11 @@ void Game::cleanup()
 	al_uninstall_mouse();
 	al_shutdown_primitives_addon();
 
+	delete _um;
+	_um = NULL;
+	delete _im;
+	_im = NULL;
+
 }
 
 void Game::beginLoop()
@@ -231,8 +258,10 @@ void Game::beginLoop()
 	mpLoopTimer->start();
 }
 	
-void Game::processLoop()
+bool Game::processLoop()
 {
+	bool ESC_Called, isEmpty;
+
 	//draw background
 	Sprite* pBackgroundSprite = mpSpriteManager->getSprite( BACKGROUND_SPRITE_ID );
 	pBackgroundSprite->draw( *(mpGraphicsSystem->getBackBuffer()), 0, 0 );
@@ -244,10 +273,14 @@ void Game::processLoop()
 	mpMessageManager->processMessagesForThisframe();
 
 	// Process input
-	mShouldExit = _im -> ProcessInput ();
+	ESC_Called = _im -> ProcessInput ();
 
 	// Check for empty _units in _um (Also a gameover)
-	mShouldExit = _um -> IsEmpty ();
+	isEmpty = _um -> IsEmpty ();
+
+	mShouldExit = ESC_Called || isEmpty;
+
+	return mShouldExit;
 }
 
 bool Game::endLoop()

@@ -16,7 +16,7 @@
 #include "Sprite.h"
 #include "Vector2D.h"
 
-enum UnitType { seek, arrive };
+enum UnitType { seek, arrive, wanderSeek, wanderFlee };
 
 class UnitManager : public Trackable {
 	public: 

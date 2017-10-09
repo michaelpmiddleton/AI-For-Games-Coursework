@@ -7,7 +7,7 @@
 
 #include "UnitManager.h"
 
-UnitManager::UnitManager() {
+UnitManager::UnitManager () {
 	//_units = std::vector<KinematicUnit*> (100); // Start the vector as size of 100. (This should be plenty big enough for the purpose of this assignment.)
 	srand (time (NULL)); 
 }
@@ -19,8 +19,8 @@ void UnitManager::Init () {
 	_player = new KinematicUnit(_playerSprite, position, 1, velocity, 0.0f, 200.0f, 10.0f);
 
 	// Create the initial, default units:
-	Add (arrive);
-	Add (seek);
+	//`Add (arrive);
+	Add (wanderSeek);
 }
 
 void UnitManager::Add (UnitType type) {
@@ -37,7 +37,7 @@ void UnitManager::Add (UnitType type) {
 				position.setX(position.getX() + 200.0f);
 
 			toBeAdded = new KinematicUnit (_enemySprite, position, 1, velocity, 0.0f, 180.0f, 100.0f);
-			toBeAdded -> dynamicArrive (_player);
+			toBeAdded -> dynamicSeek (_player);
 			break;
 
 		case arrive:
@@ -48,7 +48,29 @@ void UnitManager::Add (UnitType type) {
 				position.setY (position.getY () + 100.0f);
 		
 			toBeAdded = new KinematicUnit (_enemySprite, position, 1, velocity, 0.0f, 180.0f, 100.0f);
-			toBeAdded -> dynamicSeek (_player);
+			toBeAdded -> dynamicArrive (_player);
+			break;
+
+		case wanderSeek:
+			if (position.getX() > 200.0f)
+				position.setX(position.getX() - 200.0f);
+
+			else
+				position.setX(position.getX() + 200.0f);
+			
+			toBeAdded = new KinematicUnit(_enemySprite, position, 1, velocity, 0.0f, 180.0f, 100.0f);
+			toBeAdded -> wanderSeekFlee (_player, false);
+			break;
+
+		case wanderFlee:
+			if (position.getX() > 100.0f)
+				position.setX(position.getX() - 100.0f);
+
+			else
+				position.setX(position.getX() + 100.0f);
+
+			toBeAdded = new KinematicUnit(_enemySprite, position, 1, velocity, 0.0f, 180.0f, 100.0f);
+			toBeAdded -> wanderSeekFlee(_player, true);
 			break;
 
 		default:
@@ -84,6 +106,7 @@ void UnitManager::Update (float updateTime, GraphicsBuffer* gb) {
 }
 
 void UnitManager::Clean () {
+	// TODO: Clean this up! (ironic...)
 	while (!_units.empty ()) {
 		KinematicUnit* ku = _units.back ();
 		delete ku;

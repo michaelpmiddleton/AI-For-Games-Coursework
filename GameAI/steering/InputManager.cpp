@@ -43,10 +43,16 @@ bool InputManager::ProcessInput () {
 		_unitManager -> Add (arrive);
 	}
 
-	// S key - Add ARRIVE unit.
+	// S key - Add WanderSeek unit.
 	if (al_key_down (&keyboard, ALLEGRO_KEY_S)) {
-		std::cout << "INPUT MANAGER: Adding SEEK Unit." << std::endl;
-		_unitManager -> Add(seek);
+		std::cout << "INPUT MANAGER: Adding WANDERSEEK Unit." << std::endl;
+		_unitManager -> Add(wanderSeek);
+	}
+
+	// S key - Add WanderSeek unit.
+	if (al_key_down(&keyboard, ALLEGRO_KEY_F)) {
+		std::cout << "INPUT MANAGER: Adding WANDERFLEE Unit." << std::endl;
+		_unitManager->Add(wanderFlee);
 	}
 
 	// D key - Remove random unit.

@@ -69,15 +69,15 @@ int main(int argc, char **argv)
 		gpPerformanceTracker->clearTracker("draw");
 		gpPerformanceTracker->startTracking("draw");
 
-		gpGame->processLoop();
+		shouldExit = gpGame -> processLoop();
 
 		gpPerformanceTracker->stopTracking("draw");
 
 		shouldExit = gpGame->endLoop();
 
 		gpPerformanceTracker->stopTracking("loop");
-		cout << "loop took:" << gpPerformanceTracker->getElapsedTime("loop") << "ms";
-		cout << "draw took:" << gpPerformanceTracker->getElapsedTime("draw") << "ms\n";
+		//cout << "loop took:" << gpPerformanceTracker->getElapsedTime("loop") << "ms";
+		//cout << "draw took:" << gpPerformanceTracker->getElapsedTime("draw") << "ms\n";
 
 	}
 
