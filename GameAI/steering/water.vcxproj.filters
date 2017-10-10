@@ -64,6 +64,9 @@
     <ClCompile Include="WanderSeekFlee.cpp">
       <Filter>Source Files\Steering</Filter>
     </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Source Files\Steering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsBuffer.h">
@@ -127,6 +130,9 @@
       <Filter>Header Files\Util</Filter>
     </ClInclude>
     <ClInclude Include="WanderSeekFlee.h">
+      <Filter>Header Files\Steering</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
       <Filter>Header Files\Steering</Filter>
     </ClInclude>
   </ItemGroup>

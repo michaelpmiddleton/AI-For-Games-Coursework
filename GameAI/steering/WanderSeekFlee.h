@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Collider.h"
 #include "Steering.h"
 
 class KinematicUnit;
@@ -20,5 +21,6 @@ public:
 private:
 	KinematicUnit* mpTarget;
 	KinematicUnit* mpMover;
+	Collider* _collider;
 	bool mShouldFlee;
 };

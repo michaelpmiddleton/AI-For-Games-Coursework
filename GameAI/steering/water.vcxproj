@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Collider.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="DynamicArriveSteering.h" />
     <ClInclude Include="DynamicSeekSteering.h" />
@@ -34,6 +35,7 @@
     <ClInclude Include="WanderSeekFlee.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="DynamicArriveSteering.cpp" />
     <ClCompile Include="DynamicSeekSteering.cpp" />
     <ClCompile Include="Game.cpp" />

@@ -107,12 +107,12 @@ void UnitManager::Update (float updateTime, GraphicsBuffer* gb) {
 
 void UnitManager::Clean () {
 	// TODO: Clean this up! (ironic...)
-	while (!_units.empty ()) {
-		KinematicUnit* ku = _units.back ();
-		delete ku;
+	for (KinematicUnit* ku : _units) {
+		delete (ku);
 		ku = NULL;
-		_units.pop_back ();
 	}
+	_units.clear ();		
+	
 
 	delete _player;
 	_player = NULL;
@@ -129,4 +129,12 @@ void UnitManager::LoadSprites (Sprite* ps, Sprite* es) {
 
 KinematicUnit* UnitManager::GetPlayerUnit () {
 	return _player;
+}
+
+std::vector<KinematicUnit*> UnitManager::GetEnemyUnits () {
+	return _units;
+}
+
+int UnitManager::GetEnemyCount () {
+	return _units.size ();
 }
