@@ -75,7 +75,7 @@ Vector2D Collider::WallCorrection (Vector2D sorryJeff) {
 
 	else if (currentTrajectory.getX () < 50) {
 		changed = true;
-		currentTrajectory.setX (50 - (2 * currentTrajectory.getX () * 0.001f));
+		currentTrajectory.setX (50 + (2 * currentTrajectory.getX () * 0.001f));
 	}
 
 	if (currentTrajectory.getY () > 718) {
@@ -84,7 +84,7 @@ Vector2D Collider::WallCorrection (Vector2D sorryJeff) {
 	}
 
 	else if (currentTrajectory.getY () < 50) {
-		currentTrajectory.setY (50 - (2 * currentTrajectory.getY () * 0.0015f));
+		currentTrajectory.setY (50 + (2 * currentTrajectory.getY () * 0.0015f));
 		changed = true;
 	}
 

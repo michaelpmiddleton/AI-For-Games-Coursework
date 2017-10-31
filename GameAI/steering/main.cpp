@@ -73,7 +73,7 @@ int main(int argc, char **argv)
 
 		gpPerformanceTracker->stopTracking("draw");
 
-		shouldExit = gpGame->endLoop();
+		gpGame->endLoop();
 
 		gpPerformanceTracker->stopTracking("loop");
 		//cout << "loop took:" << gpPerformanceTracker->getElapsedTime("loop") << "ms";
@@ -88,6 +88,7 @@ int main(int argc, char **argv)
 	delete gpPerformanceTracker;
 	gMemoryTracker.reportAllocations( cout );
 	system("pause");
+	exit (0);
 
-	return 0;
+	return 0; 
 }

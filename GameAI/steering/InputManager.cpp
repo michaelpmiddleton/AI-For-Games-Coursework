@@ -19,8 +19,6 @@ void InputManager::LoadAssets (GameMessageManager* gmm, GraphicsSystem* gs, ALLE
 }
 
 bool InputManager::ProcessInput () {
-	bool gameOverToggle = false;
-	
 	// Capture mouse state:
 	ALLEGRO_MOUSE_STATE mouse;
 	al_get_mouse_state (&mouse);
@@ -30,46 +28,65 @@ bool InputManager::ProcessInput () {
 	al_get_keyboard_state (&keyboard);
 
 	
-	// Left Mouse Click - Player movement.
-	if (al_mouse_button_down (&mouse, 1)) {
-		Vector2D position (mouse.x, mouse.y);
-		GameMessage* playerMovementMessage = new PlayerMoveToMessage (position);
-		_messageManager -> addMessage (playerMovementMessage, 0);
+	//// Left Mouse Click - Player movement.
+	//if (al_mouse_button_down (&mouse, 1)) {
+	//	Vector2D position (mouse.x, mouse.y);
+	//	GameMessage* playerMovementMessage = new PlayerMoveToMessage (position);
+	//	_messageManager -> addMessage (playerMovementMessage, 0);
+	//}
+
+	// C key - [DevMode] Select COHESION parameter.
+	if (al_key_down (&keyboard, ALLEGRO_KEY_C)) {
+		std::cout << "INPUT MANAGER: [DEV] Altering COHESION parameter." << std::endl;
+		// TODO
 	}
 
-	// A key - Add ARRIVE unit.
-	if (al_key_down (&keyboard, ALLEGRO_KEY_A)) {
-		std::cout << "INPUT MANAGER: Adding ARRIVE Unit." << std::endl;
-		_unitManager -> Add (arrive);
-	}
-
-	// S key - Add WanderSeek unit.
+	// S key - [DevMode] Select SEPARATION parameter.
 	if (al_key_down (&keyboard, ALLEGRO_KEY_S)) {
-		std::cout << "INPUT MANAGER: Adding WANDERSEEK Unit." << std::endl;
-		_unitManager -> Add(wanderSeek);
+		std::cout << "INPUT MANAGER: [DEV] Altering SEPARATION parameter." << std::endl;
+		// TODO
 	}
 
-	// S key - Add WanderSeek unit.
-	if (al_key_down(&keyboard, ALLEGRO_KEY_F)) {
-		std::cout << "INPUT MANAGER: Adding WANDERFLEE Unit." << std::endl;
-		_unitManager->Add(wanderFlee);
+	// A key - [DevMode] Select ALIGNMENT parameter.
+	if (al_key_down (&keyboard, ALLEGRO_KEY_A)) {
+		std::cout << "INPUT MANAGER: [DEV] Altering ALIGNMENT parameter." << std::endl;
+		// TODO
+	}
+	
+	// + key - [DevMode] INCREMENT selected parameter.
+	if (al_key_down (&keyboard, ALLEGRO_KEY_PAD_PLUS)) {
+		std::cout << "INPUT MANAGER: [DEV] INCREMENT selected parameter." << std::endl;
+		// TODO
+	}
+
+	// - key - [DevMode] DECREMENT selected parameter.
+	if (al_key_down (&keyboard, ALLEGRO_KEY_PAD_MINUS)) {
+		std::cout << "INPUT MANAGER: [DEV] DECREMET selected parameter." << std::endl;
+		// TODO
 	}
 
 	// D key - Remove random unit.
-	if (al_key_down(&keyboard, ALLEGRO_KEY_D)) {
-		std::cout << "INPUT MANAGER: Removing random unit..." << std::endl;
+	if (al_key_down (&keyboard, ALLEGRO_KEY_D)) {
+		std::cout << "INPUT MANAGER: Removing random boid..." << std::endl;
 		_unitManager -> Remove ();
+	}
+
+	// TAB key - Toggle Dev Mode (Live-edit parameters in-engine)
+	if (al_key_down (&keyboard, ALLEGRO_KEY_TAB)) {
+		std::cout << "INPUT MANAGER: User has toggled DEV mode." << std::endl;
+		GameMessage* gameOverMessage = new GameOverMessage ();
+		_messageManager -> addMessage (gameOverMessage, 0);
 	}
 
 	// ESC key - Exit game.
 	if (al_key_down (&keyboard, ALLEGRO_KEY_ESCAPE)) {
 		std::cout << "EXIT GAME!" << std::endl;
-		gameOverToggle = true;
+		return true;
 	}
 
 	_updateMouseText (mouse);
 	
-	return gameOverToggle;
+	return false;
 }
 
 void InputManager::_updateMouseText (ALLEGRO_MOUSE_STATE mouse) {

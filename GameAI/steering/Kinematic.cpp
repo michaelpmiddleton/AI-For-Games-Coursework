@@ -65,6 +65,8 @@ float Kinematic::getOrientationFromVelocity( float currentOrientation, const Vec
 {
 	if( velocity.hasNonZeroLength() )
 	{
+		//currentOrientation = atan2 (velocity.getY (), velocity.getX ());
+		// Old Version:
 		currentOrientation = atan2(velocity.getX(), -velocity.getY()); 
 	}
 	return currentOrientation;

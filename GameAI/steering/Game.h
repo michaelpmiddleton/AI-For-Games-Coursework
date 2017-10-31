@@ -25,6 +25,8 @@ const IDType WALL_SPRITE_ID = 3 ;
 
 const float LOOP_TARGET_TIME = 33.3f;//how long should each frame of execution take? 30fps = 33.3ms/frame
 
+const float DEV_OUTPUT_OFFSET = 18.0f;
+
 class Game:public Trackable {
 	public:
 		Game();
@@ -37,6 +39,14 @@ class Game:public Trackable {
 		void beginLoop();
 		bool processLoop();
 		bool endLoop();
+
+		void ToggleDevMode ();				// Toggles _devMode which controls whether or not to show the strings for Dev mode.
+
+
+		int CohesionWeight;
+		int WanderWeight;
+		int SeparateWeight;
+		int AlignmentWeight;
 
 		inline GraphicsSystem* getGraphicsSystem() const { return mpGraphicsSystem; };
 		inline GraphicsBufferManager* getGraphicsBufferManager() const { return mpGraphicsBufferManager; };
@@ -57,6 +67,10 @@ class Game:public Trackable {
 		Timer* mpLoopTimer;
 		Timer* mpMasterTimer;
 		bool mShouldExit;
+
+		bool _devMode;				// Bool that controls whether or not _DevModeOutput is called.
+		void _DevModeOutput ();		// Method that displays and allows for real-time manipulation of variables in-engine.
+
 
 		//should be somewhere else
 		ALLEGRO_FONT* mpFont;

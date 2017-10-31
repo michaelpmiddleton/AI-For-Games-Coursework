@@ -11,13 +11,13 @@ WanderSeekFlee::WanderSeekFlee(KinematicUnit* pMover, KinematicUnit* pTarget, bo
 	}
 
 Steering* WanderSeekFlee::getSteering () {	
-	bool collisionDetected = _collider->FindClosestTarget ();
+	bool collisionDetected = _collider -> FindClosestTarget ();
 
 	// Collision avoidance:
 	if (collisionDetected) {
 		//mLinear = _collider -> GetCourseCorrection ();
-		mLinear = _collider->GetCourseCorrection () * mpMover->getMaxVelocity ();
-		mAngular = mpMover->getOrientationFromVelocity (mpMover->getOrientation (), mpMover->getVelocity ());
+		mLinear = _collider -> GetCourseCorrection () * mpMover -> getMaxVelocity ();
+		mAngular = mpMover -> getOrientationFromVelocity (mpMover -> getOrientation (), mpMover -> getVelocity ());
 	}
 
 	// Wander OR Seek/Flee:
@@ -29,11 +29,11 @@ Steering* WanderSeekFlee::getSteering () {
 		if (radiusSquared < REACTION_RADIUS) {
 			// Flee:
 			if (mShouldFlee)
-				mLinear = mpMover->getPosition () - mpTarget->getPosition ();
+				mLinear = mpMover->getPosition () - mpTarget -> getPosition ();
 
 			// Seek:
 			else
-				mLinear = mpTarget->getPosition () - mpMover->getPosition ();
+				mLinear = mpTarget->getPosition () - mpMover -> getPosition ();
 
 			// Since we aren't wandering, the orientation should stay consistent.
 			mAngular = mpMover->getOrientationFromVelocity (mpMover->getOrientation (), mpMover->getVelocity ());

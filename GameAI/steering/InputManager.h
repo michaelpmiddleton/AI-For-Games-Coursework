@@ -16,6 +16,7 @@
 #include "GraphicsSystem.h"
 #include "GameMessageManager.h"
 #include "PlayerMoveToMessage.h"
+#include "GameOverMessage.h"
 
 #include "Vector2D.h"
 #include "UnitManager.h"

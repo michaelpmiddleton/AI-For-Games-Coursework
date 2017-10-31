@@ -48,6 +48,8 @@ Game::~Game()
 bool Game::init()
 {
 	mShouldExit = false;
+	_devMode = false;
+	CohesionWeight = AlignmentWeight = SeparateWeight = 1;
 
 	//create Timers
 	mpLoopTimer = new Timer;
@@ -263,24 +265,22 @@ bool Game::processLoop()
 	bool ESC_Called, isEmpty;
 
 	//draw background
-	Sprite* pBackgroundSprite = mpSpriteManager->getSprite( BACKGROUND_SPRITE_ID );
-	pBackgroundSprite->draw( *(mpGraphicsSystem->getBackBuffer()), 0, 0 );
+	Sprite* pBackgroundSprite = mpSpriteManager -> getSprite (BACKGROUND_SPRITE_ID );
+	pBackgroundSprite -> draw (*(mpGraphicsSystem -> getBackBuffer ()), 0, 0 );
 
 	// Update units & player
 	_um -> Update (LOOP_TARGET_TIME/1000.0f, GRAPHICS_SYSTEM -> getBackBuffer ());
+	
+	// Display Dev Mode interface if ON.
+	if (_devMode)
+		_DevModeOutput ();
+	
 
 	// Process messages:
-	mpMessageManager->processMessagesForThisframe();
+	mpMessageManager->processMessagesForThisframe ();
 
-	// Process input
-	ESC_Called = _im -> ProcessInput ();
-
-	// Check for empty _units in _um (Also a gameover)
-	isEmpty = _um -> IsEmpty ();
-
-	mShouldExit = ESC_Called || isEmpty;
-
-	return mShouldExit;
+	// Returns true if ESC was typed. Else returns false.
+	return _im -> ProcessInput ();
 }
 
 bool Game::endLoop()
@@ -299,4 +299,32 @@ float genRandomFloat()
 {
 	float r = (float)rand()/(float)RAND_MAX;
 	return r;
+}
+
+void Game::ToggleDevMode () {
+	std::cout << "DEV MODE TOGGLED! (" << _devMode << " -> " << !_devMode << ")" << std::endl;
+	_devMode = !_devMode;
+}
+
+void Game::_DevModeOutput () {
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 1, ALLEGRO_ALIGN_LEFT, "              Key Mappings:");
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 2, ALLEGRO_ALIGN_LEFT, "-------------------------------------------");
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 3, ALLEGRO_ALIGN_LEFT, "[TAB] Toggle Dev Tools");
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 4, ALLEGRO_ALIGN_LEFT, "[I]   Insert FIVE units in a flock");
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 5, ALLEGRO_ALIGN_LEFT, "[D]   Remove a boid");
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 6, ALLEGRO_ALIGN_LEFT, "[+]   Increment the value of a selected weight");
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 7, ALLEGRO_ALIGN_LEFT, "[-]   Decrement the value of a selected weight");
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 8, ALLEGRO_ALIGN_LEFT, "[ESC] Escape the program");
+
+	std::string cohesionText = "[C]  Cohesion       " + std::to_string (CohesionWeight);
+	std::string separationText = "[S]  Separation     " + std::to_string (SeparateWeight);
+	std::string alignmentText = "[A]  Alignment      " + std::to_string (AlignmentWeight);
+
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 10, ALLEGRO_ALIGN_LEFT, "      Settings that you can alter:");
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 11, ALLEGRO_ALIGN_LEFT, "-------------------------------------------");
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 12, ALLEGRO_ALIGN_LEFT, cohesionText.c_str ());
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 13, ALLEGRO_ALIGN_LEFT, separationText.c_str ());
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 14, ALLEGRO_ALIGN_LEFT, alignmentText.c_str ());
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 16, ALLEGRO_ALIGN_LEFT, "Possible Values: 0 - 10");
+
 }
