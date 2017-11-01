@@ -10,13 +10,17 @@
 #include <sstream>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
+#include <allegro5/allegro_primitives.h>
+
 
 
 #include "Defines.h"
 #include "GraphicsSystem.h"
 #include "GameMessageManager.h"
 #include "PlayerMoveToMessage.h"
-#include "GameOverMessage.h"
+#include "DevModeMessage.h"
+#include "DevModeModificationMessage.h"
+#include "SaveStateMessage.h"
 
 #include "Vector2D.h"
 #include "UnitManager.h"
@@ -37,7 +41,7 @@ class InputManager : public Trackable {
 		ALLEGRO_FONT* _allegroFont;
 		UnitManager* _unitManager;
 
-		void _updateMouseText(ALLEGRO_MOUSE_STATE mouse);					// Updates the string denoting mouse position on the bottom 
+		void _updateMouseGFX(ALLEGRO_MOUSE_STATE mouse);					// Updates the string denoting mouse position on the bottom 
 
 };
 

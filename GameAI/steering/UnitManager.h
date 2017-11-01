@@ -22,7 +22,7 @@ class UnitManager : public Trackable {
 	public: 
 		UnitManager();											// Constructor
 
-		void Add (UnitType);									// Adds a unit 200 pixels away from player.
+		void Add ();											// Adds a flock at the mouse cursor.
 		void Remove ();											// Removes random unit from vector "_units"
 		void Update (float updateTime, GraphicsBuffer* gb);		// Calls update on all units.
 		bool IsEmpty ();										// Returns true if _units is empty.

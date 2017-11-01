@@ -35,34 +35,43 @@ bool InputManager::ProcessInput () {
 	//	_messageManager -> addMessage (playerMovementMessage, 0);
 	//}
 
+	// SPACE key - [DevMode] Save current state.
+	if (al_key_down (&keyboard, ALLEGRO_KEY_SPACE)) {
+		GameMessage* saveState = new SaveStateMessage ();
+		_messageManager -> addMessage (saveState, 0);
+	}
+
+
 	// C key - [DevMode] Select COHESION parameter.
 	if (al_key_down (&keyboard, ALLEGRO_KEY_C)) {
-		std::cout << "INPUT MANAGER: [DEV] Altering COHESION parameter." << std::endl;
-		// TODO
+		GameMessage* selectCohesion = new DevModeModificationMessage (SELECT, COHESION);
+		_messageManager -> addMessage (selectCohesion, 0);
 	}
 
 	// S key - [DevMode] Select SEPARATION parameter.
 	if (al_key_down (&keyboard, ALLEGRO_KEY_S)) {
-		std::cout << "INPUT MANAGER: [DEV] Altering SEPARATION parameter." << std::endl;
-		// TODO
+		GameMessage* selectSeparate = new DevModeModificationMessage (SELECT, SEPARATION);
+		_messageManager -> addMessage (selectSeparate, 0);
 	}
 
 	// A key - [DevMode] Select ALIGNMENT parameter.
 	if (al_key_down (&keyboard, ALLEGRO_KEY_A)) {
-		std::cout << "INPUT MANAGER: [DEV] Altering ALIGNMENT parameter." << std::endl;
-		// TODO
+		GameMessage* selectAlignment = new DevModeModificationMessage (SELECT, ALIGNMENT);
+		_messageManager -> addMessage (selectAlignment, 0);
 	}
 	
 	// + key - [DevMode] INCREMENT selected parameter.
 	if (al_key_down (&keyboard, ALLEGRO_KEY_PAD_PLUS)) {
 		std::cout << "INPUT MANAGER: [DEV] INCREMENT selected parameter." << std::endl;
-		// TODO
+		GameMessage* incrementSelected = new DevModeModificationMessage (INCREMENT, NONE);
+		_messageManager -> addMessage (incrementSelected, 0);
 	}
 
 	// - key - [DevMode] DECREMENT selected parameter.
 	if (al_key_down (&keyboard, ALLEGRO_KEY_PAD_MINUS)) {
 		std::cout << "INPUT MANAGER: [DEV] DECREMET selected parameter." << std::endl;
-		// TODO
+		GameMessage* decrementSelected = new DevModeModificationMessage (DECREMENT, NONE);
+		_messageManager -> addMessage (decrementSelected, 0);
 	}
 
 	// D key - Remove random unit.
@@ -73,9 +82,8 @@ bool InputManager::ProcessInput () {
 
 	// TAB key - Toggle Dev Mode (Live-edit parameters in-engine)
 	if (al_key_down (&keyboard, ALLEGRO_KEY_TAB)) {
-		std::cout << "INPUT MANAGER: User has toggled DEV mode." << std::endl;
-		GameMessage* gameOverMessage = new GameOverMessage ();
-		_messageManager -> addMessage (gameOverMessage, 0);
+		GameMessage* toggleDevMode = new DevModeMessage ();
+		_messageManager -> addMessage (toggleDevMode, 0);
 	}
 
 	// ESC key - Exit game.
@@ -84,18 +92,12 @@ bool InputManager::ProcessInput () {
 		return true;
 	}
 
-	_updateMouseText (mouse);
+	_updateMouseGFX (mouse);
 	
 	return false;
 }
 
-void InputManager::_updateMouseText (ALLEGRO_MOUSE_STATE mouse) {
-	//create mouse text
-	std::stringstream mousePositionText;
-	mousePositionText << "[X: " << mouse.x << ", Y: " << mouse.y << "]";
-
-	//write text at mouse position
-	al_draw_text (_allegroFont, al_map_rgb (255, 255, 255), mouse.x, mouse.y, ALLEGRO_ALIGN_CENTRE, mousePositionText.str ().c_str ());
-
+void InputManager::_updateMouseGFX (ALLEGRO_MOUSE_STATE mouse) {
+	al_draw_filled_circle (mouse.x, mouse.y, 3.0f, al_map_rgb (200, 200, 200));
 	_graphicsSystem -> swap ();
 }

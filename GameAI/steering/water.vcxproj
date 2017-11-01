@@ -14,16 +14,18 @@
     <ClInclude Include="CohesionSteering.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Defines.h" />
+    <ClInclude Include="DevModeModificationMessage.h" />
     <ClInclude Include="DynamicArriveSteering.h" />
     <ClInclude Include="DynamicSeekSteering.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameMessage.h" />
     <ClInclude Include="GameMessageManager.h" />
-    <ClInclude Include="GameOverMessage.h" />
+    <ClInclude Include="DevModeMessage.h" />
     <ClInclude Include="GraphicsBuffer.h" />
     <ClInclude Include="GraphicsBufferManager.h" />
     <ClInclude Include="GraphicsSystem.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="SaveStateMessage.h" />
     <ClInclude Include="SeparationSteering.h" />
     <ClInclude Include="UnitManager.h" />
     <ClInclude Include="Kinematic.h" />
@@ -40,12 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="DevModeModificationMessage.cpp" />
     <ClCompile Include="DynamicArriveSteering.cpp" />
     <ClCompile Include="DynamicSeekSteering.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameMessage.cpp" />
     <ClCompile Include="GameMessageManager.cpp" />
-    <ClCompile Include="GameOverMessage.cpp" />
+    <ClCompile Include="DevModeMessage.cpp" />
     <ClCompile Include="GraphicsBuffer.cpp" />
     <ClCompile Include="GraphicsBufferManager.cpp" />
     <ClCompile Include="GraphicsSystem.cpp" />
@@ -57,6 +60,7 @@
     <ClCompile Include="KinematicWanderSteering.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerMoveToMessage.cpp" />
+    <ClCompile Include="SaveStateMessage.cpp" />
     <ClCompile Include="UnitManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteManager.cpp" />

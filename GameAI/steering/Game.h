@@ -40,8 +40,9 @@ class Game:public Trackable {
 		bool processLoop();
 		bool endLoop();
 
-		void ToggleDevMode ();				// Toggles _devMode which controls whether or not to show the strings for Dev mode.
-
+		void ToggleDevMode ();														// Toggles _devMode which controls whether or not to show the strings for Dev mode.
+		void AdjustParameter (int value);			// Adjusts the given parameter by VALUE.
+		void ToggleSelectedParameter (ModificationParameter paramter);				// Deselects all parameters, selects stated parameter.
 
 		int CohesionWeight;
 		int WanderWeight;
@@ -70,6 +71,8 @@ class Game:public Trackable {
 
 		bool _devMode;				// Bool that controls whether or not _DevModeOutput is called.
 		void _DevModeOutput ();		// Method that displays and allows for real-time manipulation of variables in-engine.
+		void _LoadWeights ();
+		ModificationParameter _selected;
 
 
 		//should be somewhere else

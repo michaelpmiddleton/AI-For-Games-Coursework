@@ -13,93 +13,47 @@ UnitManager::UnitManager () {
 }
 
 void UnitManager::Init () {
+	// Initialize random number generator:
+	srand (time (NULL));
+	
 	// Create a player:
-	Vector2D position (200.0f, 200.0f);
-	Vector2D velocity (0.0f, 0.0f);
-	_player = new KinematicUnit(_playerSprite, position, 1, velocity, 0.0f, 200.0f, 10.0f);
+	//Vector2D position (200.0f, 200.0f);
+	//Vector2D velocity (0.0f, 0.0f);
+	//_player = new KinematicUnit(_playerSprite, position, 1, velocity, 0.0f, 200.0f, 10.0f);
 
 	// Create the initial, default units:
-	//`Add (arrive);
-	Add (wanderSeek);
+	//Add (arrive);
+	//Add (wanderSeek);
 }
 
-void UnitManager::Add (UnitType type) {
-	KinematicUnit* toBeAdded;
-	Vector2D position = _player -> getPosition ();		// TODO: Player position.
-	Vector2D velocity (0.0f, 0.0f);
-
-	switch (type) {
-		case seek:
-			if (position.getX () > 200.0f)
-				position.setX (position.getX () - 200.0f);
-
-			else
-				position.setX(position.getX() + 200.0f);
-
-			toBeAdded = new KinematicUnit (_enemySprite, position, 1, velocity, 0.0f, 180.0f, 100.0f);
-			toBeAdded -> dynamicSeek (_player);
-			break;
-
-		case arrive:
-			if (position.getY () > 100.0f)
-				position.setY (position.getY () - 100.0f);
-	
-			else
-				position.setY (position.getY () + 100.0f);
-		
-			toBeAdded = new KinematicUnit (_enemySprite, position, 1, velocity, 0.0f, 180.0f, 100.0f);
-			toBeAdded -> dynamicArrive (_player);
-			break;
-
-		case wanderSeek:
-			if (position.getX() > 200.0f)
-				position.setX(position.getX() - 200.0f);
-
-			else
-				position.setX(position.getX() + 200.0f);
-			
-			toBeAdded = new KinematicUnit(_enemySprite, position, 1, velocity, 0.0f, 180.0f, 100.0f);
-			toBeAdded -> wanderSeekFlee (_player, false);
-			break;
-
-		case wanderFlee:
-			if (position.getX() > 100.0f)
-				position.setX(position.getX() - 100.0f);
-
-			else
-				position.setX(position.getX() + 100.0f);
-
-			toBeAdded = new KinematicUnit(_enemySprite, position, 1, velocity, 0.0f, 180.0f, 100.0f);
-			toBeAdded -> wanderSeekFlee(_player, true);
-			break;
-
-		default:
-			std::cout << "ERROR: Attempted to add a unit of type " << std::to_string (type) << std::endl;
-			break;
-	}
-
-	_units.push_back (toBeAdded);
+void UnitManager::Add () {
+	// TODO
+	//_units.push_back ();
 }
 
 void UnitManager::Remove () {
-	int index = rand () % _units.size ();
-	KinematicUnit* ku = _units.at (index);
 	
-	delete ku;
-	ku = NULL;
+	if (!_units.empty ()) {
+		int index = rand () % _units.size ();
+		KinematicUnit* ku = _units.at (index);
 
-	_units.erase (_units.begin () + index);
+		_units.erase (_units.begin () + index);
+
+		delete ku;
+		ku = NULL;
+
+	}
 }
 
 void UnitManager::Update (float updateTime, GraphicsBuffer* gb) {
 	// Update Player & Enemies:
-	_player -> update (updateTime);
+	//_player -> update (updateTime);
 	
 	for each (KinematicUnit* ku in _units)
 		ku -> update (updateTime);
 	
 	// Draw Player & Enemies:
-	_player->draw(gb);
+	//_player->draw(gb);
 
 	for each (KinematicUnit* ku in _units)
 		ku->draw(gb);
@@ -111,11 +65,11 @@ void UnitManager::Clean () {
 		delete (ku);
 		ku = NULL;
 	}
-	_units.clear ();		
+	//_units.clear ();		
 	
 
-	delete _player;
-	_player = NULL;
+	//delete _player;
+	//_player = NULL;
 }
 
 bool UnitManager::IsEmpty () {

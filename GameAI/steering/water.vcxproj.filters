@@ -67,7 +67,13 @@
     <ClCompile Include="Collider.cpp">
       <Filter>Source Files\Steering</Filter>
     </ClCompile>
-    <ClCompile Include="GameOverMessage.cpp">
+    <ClCompile Include="DevModeMessage.cpp">
+      <Filter>Source Files\Messaging</Filter>
+    </ClCompile>
+    <ClCompile Include="DevModeModificationMessage.cpp">
+      <Filter>Source Files\Messaging</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveStateMessage.cpp">
       <Filter>Source Files\Messaging</Filter>
     </ClCompile>
   </ItemGroup>
@@ -147,7 +153,13 @@
     <ClInclude Include="VelocityMatchingSteering.h">
       <Filter>Header Files\Steering</Filter>
     </ClInclude>
-    <ClInclude Include="GameOverMessage.h">
+    <ClInclude Include="DevModeMessage.h">
+      <Filter>Header Files\Messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="DevModeModificationMessage.h">
+      <Filter>Header Files\Messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveStateMessage.h">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
   </ItemGroup>

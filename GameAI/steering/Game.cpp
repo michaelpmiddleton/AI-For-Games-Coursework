@@ -9,6 +9,7 @@
 #include <allegro5/allegro_primitives.h>
 
 #include <sstream>
+#include <fstream>
 
 #include "Game.h"
 #include "GraphicsSystem.h"
@@ -19,7 +20,7 @@
 #include "SpriteManager.h"
 #include "Timer.h"
 #include "KinematicUnit.h"
-#include "PlayerMoveToMessage.h"
+#include "DevModeModificationMessage.h"
 
 Game* gpGame = NULL;
 
@@ -40,16 +41,15 @@ Game::Game()
 {
 }
 
-Game::~Game()
-{
-	cleanup();
-}
+Game::~Game (){}
 
 bool Game::init()
 {
 	mShouldExit = false;
 	_devMode = false;
-	CohesionWeight = AlignmentWeight = SeparateWeight = 1;
+
+	_LoadWeights ();
+	_selected = NONE;
 
 	//create Timers
 	mpLoopTimer = new Timer;
@@ -302,29 +302,116 @@ float genRandomFloat()
 }
 
 void Game::ToggleDevMode () {
-	std::cout << "DEV MODE TOGGLED! (" << _devMode << " -> " << !_devMode << ")" << std::endl;
-	_devMode = !_devMode;
+	if (_devMode) {
+		std::cout << "DEV MODE DEACTIVATED!" << std::endl;
+		ToggleSelectedParameter (NONE);
+		_devMode = false;
+	}
+	else {
+		std::cout << "DEV MODE ENABLED!" << std::endl;
+		_devMode = true;
+	}
 }
 
 void Game::_DevModeOutput () {
 	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 1, ALLEGRO_ALIGN_LEFT, "              Key Mappings:");
 	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 2, ALLEGRO_ALIGN_LEFT, "-------------------------------------------");
-	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 3, ALLEGRO_ALIGN_LEFT, "[TAB] Toggle Dev Tools");
-	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 4, ALLEGRO_ALIGN_LEFT, "[I]   Insert FIVE units in a flock");
-	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 5, ALLEGRO_ALIGN_LEFT, "[D]   Remove a boid");
-	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 6, ALLEGRO_ALIGN_LEFT, "[+]   Increment the value of a selected weight");
-	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 7, ALLEGRO_ALIGN_LEFT, "[-]   Decrement the value of a selected weight");
-	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 8, ALLEGRO_ALIGN_LEFT, "[ESC] Escape the program");
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 3, ALLEGRO_ALIGN_LEFT, "[TAB]   Toggle Dev Tools");
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 4, ALLEGRO_ALIGN_LEFT, "[I]     Insert FIVE units in a flock");
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 5, ALLEGRO_ALIGN_LEFT, "[D]     Remove a boid");
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 6, ALLEGRO_ALIGN_LEFT, "[+]     Increment the value of a selected weight");
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 7, ALLEGRO_ALIGN_LEFT, "[-]     Decrement the value of a selected weight");
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 8, ALLEGRO_ALIGN_LEFT, "[SPACE] Save the current settings of the program");
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 9, ALLEGRO_ALIGN_LEFT, "[ESC]   Exit the program");
 
-	std::string cohesionText = "[C]  Cohesion       " + std::to_string (CohesionWeight);
+
+	std::string cohesionText   = "[C]  Cohesion       " + std::to_string (CohesionWeight);
 	std::string separationText = "[S]  Separation     " + std::to_string (SeparateWeight);
-	std::string alignmentText = "[A]  Alignment      " + std::to_string (AlignmentWeight);
+	std::string alignmentText  = "[A]  Alignment      " + std::to_string (AlignmentWeight);
 
-	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 10, ALLEGRO_ALIGN_LEFT, "      Settings that you can alter:");
-	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 11, ALLEGRO_ALIGN_LEFT, "-------------------------------------------");
-	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 12, ALLEGRO_ALIGN_LEFT, cohesionText.c_str ());
-	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 13, ALLEGRO_ALIGN_LEFT, separationText.c_str ());
-	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 14, ALLEGRO_ALIGN_LEFT, alignmentText.c_str ());
-	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 16, ALLEGRO_ALIGN_LEFT, "Possible Values: 0 - 10");
+	al_draw_text (mpFont,al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 12, ALLEGRO_ALIGN_LEFT, "      Settings that you can alter:");
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 13, ALLEGRO_ALIGN_LEFT, "-------------------------------------------");
+	al_draw_text (
+		mpFont,
+		(_selected == COHESION ? (al_map_rgb (255, 0, 0)) : (al_map_rgb (255, 255, 255))),
+		10.0f, DEV_OUTPUT_OFFSET * 14,
+		ALLEGRO_ALIGN_LEFT,
+		cohesionText.c_str ()
+	);
+	al_draw_text (
+		mpFont,
+		(_selected == SEPARATION ? (al_map_rgb (255, 0, 0)) : (al_map_rgb (255, 255, 255))),
+		10.0f, DEV_OUTPUT_OFFSET * 15,
+		ALLEGRO_ALIGN_LEFT,
+		separationText.c_str ()
+	);
+	al_draw_text (
+		mpFont,
+		(_selected == ALIGNMENT ? (al_map_rgb (255, 0, 0)) : (al_map_rgb (255, 255, 255))),
+		10.0f,
+		DEV_OUTPUT_OFFSET * 16,
+		ALLEGRO_ALIGN_LEFT,
+		alignmentText.c_str ()
+	);
+	al_draw_text (mpFont, al_map_rgb (255, 255, 255), 10.0f, DEV_OUTPUT_OFFSET * 17, ALLEGRO_ALIGN_LEFT, "Possible Values: 0 - 10");
 
+}
+
+void Game::ToggleSelectedParameter (ModificationParameter parameter) {
+	if (_selected == parameter)
+		_selected = NONE;
+
+	else
+		_selected = parameter;
+}
+
+void Game::AdjustParameter (int value) {
+	// Only toggle data when the menu is up:
+	if (_devMode) {
+		switch (_selected) {
+			case COHESION:	
+				if (CohesionWeight + value >= 0 && CohesionWeight + value <= 10) 
+					CohesionWeight += value;
+				break;
+
+			case SEPARATION:
+				if (SeparateWeight + value >= 0 && SeparateWeight + value <= 10)
+					SeparateWeight += value;
+				break;
+
+			case ALIGNMENT:
+				if (AlignmentWeight + value >= 0 && AlignmentWeight + value <= 10)
+					AlignmentWeight += value;
+				break;
+
+			default:
+				std::cout << "ERROR:\tCan't change weight of value NONE." << std::endl;
+				break;
+		}
+	}
+}
+
+void Game::_LoadWeights () {
+	ifstream inputFile ("preferences.dat");
+	if (inputFile.is_open ()) {
+		std::cout << "Loading in preferences from save file.....";
+		std::string line;
+		
+		getline (inputFile, line);
+		CohesionWeight = atoi (line.c_str ());
+
+		getline (inputFile, line);
+		SeparateWeight = atoi (line.c_str ());
+
+		getline (inputFile, line);
+		AlignmentWeight = atoi (line.c_str ());
+
+		inputFile.close ();
+		std::cout << "DONE!" << std::endl;
+	}
+
+	else {
+		std::cout << "No preferences file found. Loading default of 5 to all weights." << std::endl;
+		CohesionWeight = AlignmentWeight = SeparateWeight = 5;
+	}
 }
