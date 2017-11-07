@@ -1,0 +1,5 @@
+﻿  main.cpp
+f:\documents\champlain\classes\egp-410\external libs\allegro5\include\allegro5\base.h(23): fatal error C1083: Cannot open include file: 'errno.h': No such file or directory
+  Editor.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.10.25017\include\crtdefs.h(10): fatal error C1083: Cannot open include file: 'corecrt.h': No such file or directory
+  Generating Code...

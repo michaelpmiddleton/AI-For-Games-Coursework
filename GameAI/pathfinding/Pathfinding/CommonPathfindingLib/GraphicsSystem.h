@@ -36,5 +36,5 @@ private:
 class AllegroColorCompare
 { // simple comparison function
 public:
-	bool operator()( const ALLEGRO_COLOR& lhs, const ALLEGRO_COLOR& rhs );
+	bool operator()( const ALLEGRO_COLOR& lhs, const ALLEGRO_COLOR& rhs) const ;
 };

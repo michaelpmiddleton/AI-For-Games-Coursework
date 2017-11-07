@@ -89,7 +89,7 @@ ALLEGRO_BITMAP* GraphicsSystem::switchTargetBitmap( ALLEGRO_BITMAP* pNewTarget )
 	return pOldTarget;
 }
 
-bool AllegroColorCompare::operator()( const ALLEGRO_COLOR& lhs, const ALLEGRO_COLOR& rhs ) 
+bool AllegroColorCompare::operator()( const ALLEGRO_COLOR& lhs, const ALLEGRO_COLOR& rhs ) const 
 { 
 	if( lhs.r < rhs.r )
 	{
