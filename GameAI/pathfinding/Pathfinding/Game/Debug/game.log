@@ -1,18 +1,10 @@
-﻿  PathToMessage.cpp
+﻿  DjikstraPathfinder.cpp
+  Generating Code...
+  Compiling...
   PathfindingDebugContent.cpp
-  Pathfinder.cpp
-  Path.cpp
-  Node.cpp
-  main.cpp
+  PathToMessage.cpp
   GridPathfinder.cpp
-  GridGraph.cpp
-  Graph.cpp
-  GameMessageManager.cpp
-  GameMessage.cpp
   GameApp.cpp
-  DepthFirstPathfinder.cpp
-  DebugDisplay.cpp
-  Connection.cpp
   Generating Code...
   game.vcxproj -> F:\Documents\Champlain\Classes\EGP-410\GameAI\pathfinding\Pathfinding\Debug\game.exe
   game.vcxproj -> F:\Documents\Champlain\Classes\EGP-410\GameAI\pathfinding\Pathfinding\Debug\game.pdb (Partial PDB)

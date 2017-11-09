@@ -11,3 +11,7 @@ Pathfinder::~Pathfinder()
 {
 }
 
+void Pathfinder::ClearGraph () {
+	mpGraph -> Reset ();
+}
+

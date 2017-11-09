@@ -23,34 +23,35 @@ class DebugDisplay;
 const float LOOP_TARGET_TIME = 33.3f;//how long should each frame of execution take? 30fps = 33.3ms/frame
 
 
-class GameApp: public Game
-{
-public:
-	GameApp();
-	~GameApp();
+class GameApp: public Game {
+	public:
+		GameApp();
+		~GameApp();
 
-	virtual bool init();
-	virtual void cleanup();
+		virtual bool init();
+		virtual void cleanup();
 
-	//game loop
-	virtual void beginLoop();
-	virtual void processLoop();
-	virtual bool endLoop();
+		//game loop
+		virtual void beginLoop();
+		virtual void processLoop();
+		virtual bool endLoop();
 
-	//accessors
-	inline GameMessageManager* getMessageManager() { return mpMessageManager; };
-	inline GridVisualizer* getGridVisualizer() { return mpGridVisualizer; };
-	inline GridPathfinder* getPathfinder() { return mpPathfinder; };
-	inline Grid* getGrid() { return mpGrid; };
-	inline GridGraph* getGridGraph() { return mpGridGraph; };
-private:
-	GameMessageManager* mpMessageManager;
-	Grid* mpGrid;
-	GridVisualizer* mpGridVisualizer;
-	GridGraph* mpGridGraph;
-	DebugDisplay* mpDebugDisplay;
+		//accessors
+		inline GameMessageManager* getMessageManager() { return mpMessageManager; };
+		inline GridVisualizer* getGridVisualizer() { return mpGridVisualizer; };
+		inline GridPathfinder* getPathfinder() { return mpPathfinder; };
+		inline Grid* getGrid () { return mpGrid; };
+		inline GridGraph* getGridGraph() { return mpGridGraph; };
 
-	GridPathfinder* mpPathfinder;
+	private:
+		GameMessageManager* mpMessageManager;
+		Grid* mpGrid;
+		GridVisualizer* mpGridVisualizer;
+		GridGraph* mpGridGraph;
+		DebugDisplay* mpDebugDisplay;
 
+		GridPathfinder* mpPathfinder;				// This is the original, depth-first pathfinder.
+		GridPathfinder* _aStarPathfinder;			// Pathfinder using the A* algorithm.
+		GridPathfinder* _djikstraPathfinder;		// Pathfinder using ther Djikstra algorithm.
 };
 

@@ -13,12 +13,15 @@
 #include "GridGraph.h"
 #include "Connection.h"
 #include "Path.h"
-#include "DepthFirstPathfinder.h"
+//#include "DepthFirstPathfinder.h"
 #include "Pathfinder.h"
 #include "GridPathfinder.h"
 #include "GridVisualizer.h"
 #include "DebugDisplay.h"
 #include "PathfindingDebugContent.h"
+
+#include "DjikstraPathfinder.h"
+#include "AStarPathfinder.h"
 
 #include <fstream>
 #include <vector>
@@ -63,7 +66,16 @@ bool GameApp::init()
 	//init the nodes and connections
 	mpGridGraph->init();
 
-	mpPathfinder = new DepthFirstPathfinder(mpGridGraph);
+
+
+	// NOTETOSELF: Uncomment these when the classes are done!
+	//mpPathfinder = new DepthFirstPathfinder (mpGridGraph);
+	//_aStarPathfinder = new AStarPathfinder (mpGridGraph);
+	mpPathfinder = new DjikstraPathfinder (mpGridGraph); 
+
+
+
+
 
 	//load buffers
 	mpGraphicsBufferManager->loadBuffer( BACKGROUND_ID, "wallpaper.bmp");

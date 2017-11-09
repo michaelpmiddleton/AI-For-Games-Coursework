@@ -19,6 +19,8 @@ public:
 
 	virtual const Path& findPath( Node* pFrom, Node* pTo ) = 0;
 
+	void ClearGraph();
+
 protected:
 	Graph* mpGraph;
 	Path mPath;  //cached version of the calculated path

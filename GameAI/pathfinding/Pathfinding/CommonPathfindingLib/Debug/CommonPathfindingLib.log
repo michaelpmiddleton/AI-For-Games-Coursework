@@ -1,10 +1,9 @@
-﻿  SpriteManager.cpp
+﻿  Grid.cpp
+  GraphicsSystem.cpp
+  Generating Code...
+  Skipping... (no relevant changes detected)
   Sprite.cpp
   GridVisualizer.cpp
-  Grid.cpp
-  GraphicsSystem.cpp
-  GraphicsBufferManager.cpp
   GraphicsBuffer.cpp
   Game.cpp
-  Generating Code...
   CommonPathfindingLib.vcxproj -> F:\Documents\Champlain\Classes\EGP-410\GameAI\pathfinding\Pathfinding\CommonPathfindingLib\Debug\CommonPathfindingLib.lib

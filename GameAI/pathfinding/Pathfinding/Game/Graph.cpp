@@ -7,6 +7,8 @@ Graph::Graph()
 
 Graph::~Graph()
 {
+	Reset ();
+
 	for( unsigned int i=0; i<mNodes.size(); i++ )
 	{
 		delete mNodes[i];
@@ -24,7 +26,7 @@ void Graph::init()
 
 std::vector<Connection*> Graph::getConnections( const Node& from )
 {
-	return getConnections( from.getId() );
+	return getConnections( from.GetId() );
 }
 
 std::vector<Connection*> Graph::getConnections( const NODE_ID& fromId )
@@ -52,4 +54,10 @@ Node* Graph::getNode( int index )
 	{
 		return NULL;
 	}
+}
+
+
+void Graph::Reset () {
+	for each (Node* node in mNodes)
+		node -> ResetNode ();
 }

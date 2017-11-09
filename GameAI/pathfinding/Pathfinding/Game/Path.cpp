@@ -1,64 +1,56 @@
 #include "Path.h"
 
-Path::Path()
-{
-}
+Path::Path () {}
+Path::~Path () {}
 
-Path::~Path()
-{
-}
 
-Node* Path::peekNode( int index ) const
-{
-	if( (unsigned int)index < mNodes.size() )
-	{
-		return mNodes[index];
+// Returns reference to the Node at 'index.'
+Node* Path::PeekNode (int index) const {
+	if ((unsigned int)index < _nodes.size ()) {
+		return _nodes[index];
 	}
-	else
-	{
+	else {
 		return NULL;
 	}
 }
 
-Node* Path::peekNextNode() const
-{
-	if( mNodes.size() > 0 )
-	{
-		return mNodes.back();
+
+// Returns reference to the Node at the end of the vector _nodes.
+Node* Path::PeekNextNode () const {
+	if (_nodes.size () > 0) {
+		return _nodes.back ();
 	}
-	else
-	{
+	else {
 		return NULL;
 	}
 }
 
-Node* Path::getAndRemoveNextNode()
-{
-	if( mNodes.size() > 0 )
-	{
-		Node* pNode = mNodes.back();
-		mNodes.pop_back();
-		return pNode;
+
+// Returns reference to the Node at the end of the vector _nodes and removes it from the vector.
+Node* Path::GetAndRemoveNextNode () {
+	if (_nodes.size () > 0) {
+		Node* toBeReturned = _nodes.back ();
+		_nodes.pop_back ();
+		return toBeReturned;
 	}
-	else
-	{
+	else {
 		return NULL;
 	}
 }
 
-void Path::addNode( Node* pNode )
-{
-	mNodes.push_back( pNode );
+
+// Adds Node to the pack of the vector _nodes.
+void Path::AddNode (Node* toBeAdded) {
+	_nodes.push_back (toBeAdded);
 }
 
-bool Path::containsNode( Node* pNode ) const
-{
+
+// Returns true if 'toBeChecked' is in _nodes.
+bool Path::Contains (Node* toBeChecked) const {
 	bool retVal = false;
 
-	for( unsigned int i=0; i<mNodes.size(); i++ )
-	{
-		if( mNodes[i] == pNode )
-		{
+	for (unsigned int i = 0; i<_nodes.size (); i++) {
+		if (_nodes[i] == toBeChecked) {
 			retVal = true;
 			break;
 		}
@@ -66,7 +58,24 @@ bool Path::containsNode( Node* pNode ) const
 	return retVal;
 }
 
-void Path::clear()
-{
-	mNodes.clear();
+
+// Clears the vector _nodes.
+void Path::Clear () {
+	_nodes.clear ();
+}
+
+
+
+Path* Path::GetPathToTargetNode (Node* target, Node* source) {
+	Path* toBeUsed = new Path ();
+	Node* currentNode = target;
+	
+	//while (currentNode -> GetId () != source -> GetId ()) {
+	while (currentNode != NULL) {
+		toBeUsed -> AddNode (currentNode);
+		currentNode = currentNode -> GetParentNode ();
+	}
+
+	toBeUsed -> AddNode (source);
+	return toBeUsed;
 }

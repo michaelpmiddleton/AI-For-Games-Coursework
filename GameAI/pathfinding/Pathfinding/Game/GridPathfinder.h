@@ -6,6 +6,14 @@ class GridVisualizer;
 class GraphicsBuffer;
 class PathfindingDebugContent;
 
+
+struct CompareNodeByDistanceFromOrigin {	// Compares nodes using the variable _distanceFromOrigin.
+	bool operator () (const Node* lhs, const Node* rhs) {
+		return lhs->GetDistanceFromOrigin () > rhs->GetDistanceFromOrigin ();
+	};
+};
+
+
 class GridPathfinder:public Pathfinder
 {
 public:

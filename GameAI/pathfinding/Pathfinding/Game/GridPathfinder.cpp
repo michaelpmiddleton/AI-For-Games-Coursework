@@ -38,21 +38,21 @@ void GridPathfinder::drawVisualization( Grid* pGrid, GraphicsBuffer* pDest )
 	static ALLEGRO_COLOR startColor = al_map_rgb(1, 255, 128);
 	static ALLEGRO_COLOR stopColor = al_map_rgb(1, 128, 255);
 
-	unsigned int numNodes = mPath.getNumNodes();
+	unsigned int numNodes = mPath.GetSize();
 	ALLEGRO_COLOR currentPathColor = pathColor;
 
 	if (numNodes > 0)
 	{
 		for (unsigned int i = 1; i < numNodes-1; i++)
 		{
-			mpVisualizer->addColor(mPath.peekNode(i)->getId(), currentPathColor);
+			mpVisualizer->addColor(mPath.PeekNode(i)->GetId(), currentPathColor);
 			float lerpVal = lerp( i, 0, numNodes );
 			currentPathColor.r = 1.0f - lerpVal;
 		}
 
 		//add beginning and ending color
-		mpVisualizer->addColor(mPath.peekNode(0)->getId(), startColor);
-		mpVisualizer->addColor(mPath.peekNode(numNodes - 1)->getId(), stopColor);
+		mpVisualizer->addColor(mPath.PeekNode(0)->GetId(), startColor);
+		mpVisualizer->addColor(mPath.PeekNode(numNodes - 1)->GetId(), stopColor);
 	}
 
 	mpVisualizer->draw(*pDest);

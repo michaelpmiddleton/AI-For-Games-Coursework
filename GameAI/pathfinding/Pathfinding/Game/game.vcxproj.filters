@@ -66,6 +66,12 @@
     <ClInclude Include="PathfindingDebugContent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AStarPathfinder.h">
+      <Filter>Header Files\pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="DjikstraPathfinder.h">
+      <Filter>Header Files\pathfinding</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameMessage.cpp">
@@ -98,9 +104,6 @@
     <ClCompile Include="Pathfinder.cpp">
       <Filter>Source Files\pathfinding</Filter>
     </ClCompile>
-    <ClCompile Include="DepthFirstPathfinder.cpp">
-      <Filter>Source Files\pathfinding</Filter>
-    </ClCompile>
     <ClCompile Include="PathToMessage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -112,6 +115,12 @@
     </ClCompile>
     <ClCompile Include="PathfindingDebugContent.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStarPathfinder.cpp">
+      <Filter>Source Files\pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="DjikstraPathfinder.cpp">
+      <Filter>Source Files\pathfinding</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
