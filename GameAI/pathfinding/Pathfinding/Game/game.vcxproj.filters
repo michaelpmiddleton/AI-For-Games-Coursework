@@ -48,9 +48,6 @@
     <ClInclude Include="Pathfinder.h">
       <Filter>Header Files\pathfinding</Filter>
     </ClInclude>
-    <ClInclude Include="DepthFirstPathfinder.h">
-      <Filter>Header Files\pathfinding</Filter>
-    </ClInclude>
     <ClInclude Include="PathToMessage.h">
       <Filter>Header Files</Filter>
     </ClInclude>

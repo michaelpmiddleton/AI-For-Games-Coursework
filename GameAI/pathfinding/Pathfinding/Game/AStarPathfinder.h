@@ -19,11 +19,14 @@ class Grid;
 
 class AStarPathfinder : public GridPathfinder {
 	public:
-		AStarPathfinder (Graph* pGraph);
+		AStarPathfinder (Graph* pGraph, Grid* appGrid);
 		~AStarPathfinder ();
 
 		const Path& findPath (Node* sourceNode, Node* targetNode);
+		float _AStarHeuristic (Node* source, Node* target);
+		std::string GetAlgorithmName ();
 
 	private:
+		Grid* _appGrid;
 };
 

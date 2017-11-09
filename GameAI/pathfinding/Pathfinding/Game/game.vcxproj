@@ -83,7 +83,6 @@
     <ClInclude Include="Connection.h" />
     <ClInclude Include="DebugContent.h" />
     <ClInclude Include="DebugDisplay.h" />
-    <ClInclude Include="DepthFirstPathfinder.h" />
     <ClInclude Include="DjikstraPathfinder.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="GameMessage.h" />

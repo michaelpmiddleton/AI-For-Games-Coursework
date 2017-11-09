@@ -13,7 +13,6 @@
 #include "GridGraph.h"
 #include "Connection.h"
 #include "Path.h"
-//#include "DepthFirstPathfinder.h"
 #include "Pathfinder.h"
 #include "GridPathfinder.h"
 #include "GridVisualizer.h"
@@ -28,7 +27,8 @@
 
 const IDType BACKGROUND_ID = ENDING_SEQUENTIAL_ID + 1;
 const int GRID_SQUARE_SIZE = 32;
-const std::string gFileName = "pathgrid.txt";
+//const std::string gFileName = "default.txt";
+const std::string gFileName = "alternate.txt";
 
 GameApp::GameApp()
 :mpMessageManager(NULL)
@@ -68,10 +68,9 @@ bool GameApp::init()
 
 
 
-	// NOTETOSELF: Uncomment these when the classes are done!
-	//mpPathfinder = new DepthFirstPathfinder (mpGridGraph);
-	//_aStarPathfinder = new AStarPathfinder (mpGridGraph);
-	mpPathfinder = new DjikstraPathfinder (mpGridGraph); 
+	_djikstraPathfinder = new DjikstraPathfinder (mpGridGraph);
+	_aStarPathfinder = new AStarPathfinder (mpGridGraph, mpGrid);
+	mpPathfinder = _aStarPathfinder; 
 
 
 

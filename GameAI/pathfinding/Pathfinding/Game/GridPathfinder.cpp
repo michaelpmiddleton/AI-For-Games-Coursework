@@ -58,3 +58,5 @@ void GridPathfinder::drawVisualization( Grid* pGrid, GraphicsBuffer* pDest )
 	mpVisualizer->draw(*pDest);
 }
 #endif
+
+std::string GridPathfinder::GetAlgorithmName () { return "UNOVERIDDEN";}

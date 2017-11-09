@@ -86,3 +86,6 @@ const Path& DjikstraPathfinder::findPath (Node* sourceNode, Node* targetNode) {
 	return mPath;
 }
 
+
+
+std::string DjikstraPathfinder::GetAlgorithmName () {return "Dijkstra";}
