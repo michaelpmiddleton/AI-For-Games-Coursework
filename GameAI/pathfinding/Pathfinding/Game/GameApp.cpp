@@ -108,8 +108,11 @@ void GameApp::cleanup()
 	delete mpGridGraph;
 	mpGridGraph = NULL;
 
-	delete mpPathfinder;
-	mpPathfinder = NULL;
+	delete _djikstraPathfinder;
+	_djikstraPathfinder = NULL;
+
+	delete _aStarPathfinder;
+	_aStarPathfinder = NULL;
 
 	delete mpDebugDisplay;
 	mpDebugDisplay = NULL;
@@ -150,6 +153,15 @@ void GameApp::processLoop()
 			lastPos = pos;
 		}
 	}
+
+	ALLEGRO_KEYBOARD_STATE keyboardState;
+	al_get_keyboard_state (&keyboardState);
+
+	if (al_key_down (&keyboardState, ALLEGRO_KEY_D))
+		mpPathfinder = _djikstraPathfinder;
+	
+	if (al_key_down (&keyboardState, ALLEGRO_KEY_A))
+		mpPathfinder = _aStarPathfinder;
 
 	//should be last thing in processLoop
 	Game::processLoop();

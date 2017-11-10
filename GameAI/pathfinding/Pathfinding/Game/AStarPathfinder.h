@@ -26,6 +26,7 @@ class AStarPathfinder : public GridPathfinder {
 		float _AStarHeuristic (Node* source, Node* target);
 		std::string GetAlgorithmName ();
 
+
 	private:
 		Grid* _appGrid;
 };

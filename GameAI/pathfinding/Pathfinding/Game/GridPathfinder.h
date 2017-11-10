@@ -25,6 +25,7 @@ public:
 	virtual const Path& findPath( Node* pFrom, Node* pTo ) = 0;
 	virtual std::string GetAlgorithmName ();
 
+
 #ifdef VISUALIZE_PATH
 	//just for visualization
 public:

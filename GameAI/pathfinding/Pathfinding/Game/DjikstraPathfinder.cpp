@@ -54,9 +54,6 @@ const Path& DjikstraPathfinder::findPath (Node* sourceNode, Node* targetNode) {
 	while (!nodesToVisit.empty ()) {
 		currentNode = nodesToVisit.top ();		// Peak closest node.
 		nodesToVisit.pop ();					// Pop said node.
-		
-		if (currentNode -> GetId () == targetNode -> GetId ())
-			break;
 
 		connections = mpGraph -> getConnections (currentNode -> GetId ()); // Get all nodes connected to the current node.
 		
@@ -73,7 +70,15 @@ const Path& DjikstraPathfinder::findPath (Node* sourceNode, Node* targetNode) {
 		}
 	}
 
-	mPath = *(mPath.GetPathToTargetNode (targetNode, sourceNode));
+	// Copy pointer from mPath:
+	Path* temp = mPath.GetPathToTargetNode (targetNode, sourceNode);
+	
+	// Transfer path pointer:
+	mPath = *temp;
+		
+	// Delete temporary pointer:
+	delete temp;
+	temp = NULL;
 
 	// /////////////////////////////////////////////////////////////////////////////////////////
 	

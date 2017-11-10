@@ -20,7 +20,6 @@ string PathfindingDebugContent::getDebugString()
 	theStream << "  Num Nodes Processed:" << mpPathfinder->mVisitedNodes.size();
 #endif
 	theStream << "  Elapsed Time:" << mpPathfinder->mTimeElapsed;
-	theStream << "  Pathfinding Method: " << mpPathfinder -> GetAlgorithmName ();
 	return theStream.str();
 }
 

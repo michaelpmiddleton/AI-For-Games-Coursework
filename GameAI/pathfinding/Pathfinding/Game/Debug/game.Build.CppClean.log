@@ -1,8 +1,9 @@
 f:\documents\champlain\classes\egp-410\gameai\pathfinding\pathfinding\game\debug\vc141.pdb
 f:\documents\champlain\classes\egp-410\gameai\pathfinding\pathfinding\game\debug\vc141.idb
+f:\documents\champlain\classes\egp-410\gameai\pathfinding\pathfinding\game\debug\astarpathfinder.obj
 f:\documents\champlain\classes\egp-410\gameai\pathfinding\pathfinding\game\debug\connection.obj
 f:\documents\champlain\classes\egp-410\gameai\pathfinding\pathfinding\game\debug\debugdisplay.obj
-f:\documents\champlain\classes\egp-410\gameai\pathfinding\pathfinding\game\debug\depthfirstpathfinder.obj
+f:\documents\champlain\classes\egp-410\gameai\pathfinding\pathfinding\game\debug\djikstrapathfinder.obj
 f:\documents\champlain\classes\egp-410\gameai\pathfinding\pathfinding\game\debug\gameapp.obj
 f:\documents\champlain\classes\egp-410\gameai\pathfinding\pathfinding\game\debug\gamemessage.obj
 f:\documents\champlain\classes\egp-410\gameai\pathfinding\pathfinding\game\debug\gamemessagemanager.obj
@@ -15,6 +16,10 @@ f:\documents\champlain\classes\egp-410\gameai\pathfinding\pathfinding\game\debug
 f:\documents\champlain\classes\egp-410\gameai\pathfinding\pathfinding\game\debug\pathfinder.obj
 f:\documents\champlain\classes\egp-410\gameai\pathfinding\pathfinding\game\debug\pathfindingdebugcontent.obj
 f:\documents\champlain\classes\egp-410\gameai\pathfinding\pathfinding\game\debug\pathtomessage.obj
+f:\documents\champlain\classes\egp-410\gameai\pathfinding\pathfinding\debug\game.ilk
+f:\documents\champlain\classes\egp-410\gameai\pathfinding\pathfinding\debug\game.exe
+f:\documents\champlain\classes\egp-410\gameai\pathfinding\pathfinding\debug\game.pdb
+f:\documents\champlain\classes\egp-410\gameai\pathfinding\pathfinding\game\debug\gridpathfinder.obj.enc
 f:\documents\champlain\classes\egp-410\gameai\pathfinding\pathfinding\game\debug\game.tlog\cl.read.1.tlog
 f:\documents\champlain\classes\egp-410\gameai\pathfinding\pathfinding\game\debug\game.tlog\cl.write.1.tlog
 f:\documents\champlain\classes\egp-410\gameai\pathfinding\pathfinding\game\debug\game.tlog\cl.command.1.tlog

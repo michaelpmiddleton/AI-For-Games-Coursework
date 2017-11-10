@@ -76,7 +76,15 @@ const Path& AStarPathfinder::findPath (Node* sourceNode, Node* targetNode) {
 		}
 	}
 
-	mPath = *(mPath.GetPathToTargetNode (targetNode, sourceNode));
+	// Copy pointer from mPath:
+	Path* temp = mPath.GetPathToTargetNode (targetNode, sourceNode);
+
+	// Transfer path pointer:
+	mPath = *temp;
+
+	// Delete temporary pointer:
+	delete temp;
+	temp = NULL;
 
 	// /////////////////////////////////////////////////////////////////////////////////////////
 
