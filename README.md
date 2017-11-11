@@ -1,4 +1,7 @@
 # __EGP 410: AI For Games__  
+
+### NOTE: As of 11 November 2017, development on this repository has ended.  
+
 This repository comprises the files for the "AI For Games" (EGP-410) course I took while studying abroad in Montreal in Fall 2017. It is forked from the [default class repository](https://github.com/zap-twiz/EGP-410).    
 </br>
 <div align="center">
