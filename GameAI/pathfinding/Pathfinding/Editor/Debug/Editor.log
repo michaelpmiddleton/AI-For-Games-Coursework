@@ -1,2 +1,5 @@
-﻿  Editor.vcxproj -> F:\Documents\Champlain\Classes\EGP-410\GameAI\pathfinding\Pathfinding\Debug\Editor.exe
-  Editor.vcxproj -> F:\Documents\Champlain\Classes\EGP-410\GameAI\pathfinding\Pathfinding\Debug\Editor.pdb (Partial PDB)
+﻿  main.cpp
+  Editor.cpp
+  Generating Code...
+  Editor.vcxproj -> C:\Users\Student\Documents\mmiddleton\EGP-410\GameAI\pathfinding\Pathfinding\Debug\Editor.exe
+  Editor.vcxproj -> C:\Users\Student\Documents\mmiddleton\EGP-410\GameAI\pathfinding\Pathfinding\Debug\Editor.pdb (Partial PDB)

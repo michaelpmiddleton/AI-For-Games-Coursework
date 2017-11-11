@@ -11,8 +11,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClInclude Include="CohesionSteering.h" />
     <ClInclude Include="Collider.h" />
+=======
+>>>>>>> parent of 687f4b9... Assignment 2 Complete
     <ClInclude Include="Defines.h" />
     <ClInclude Include="DevModeModificationMessage.h" />
     <ClInclude Include="DynamicArriveSteering.h" />
@@ -41,8 +44,11 @@
     <ClInclude Include="WanderSeekFlee.h" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="DevModeModificationMessage.cpp" />
+=======
+>>>>>>> parent of 687f4b9... Assignment 2 Complete
     <ClCompile Include="DynamicArriveSteering.cpp" />
     <ClCompile Include="DynamicSeekSteering.cpp" />
     <ClCompile Include="Game.cpp" />

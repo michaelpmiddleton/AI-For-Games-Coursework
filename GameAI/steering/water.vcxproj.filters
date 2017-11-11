@@ -64,6 +64,7 @@
     <ClCompile Include="WanderSeekFlee.cpp">
       <Filter>Source Files\Steering</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Collider.cpp">
       <Filter>Source Files\Steering</Filter>
     </ClCompile>
@@ -76,6 +77,8 @@
     <ClCompile Include="SaveStateMessage.cpp">
       <Filter>Source Files\Messaging</Filter>
     </ClCompile>
+=======
+>>>>>>> parent of 687f4b9... Assignment 2 Complete
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsBuffer.h">
@@ -141,6 +144,7 @@
     <ClInclude Include="WanderSeekFlee.h">
       <Filter>Header Files\Steering</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Collider.h">
       <Filter>Header Files\Steering</Filter>
     </ClInclude>
@@ -162,6 +166,8 @@
     <ClInclude Include="SaveStateMessage.h">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
+=======
+>>>>>>> parent of 687f4b9... Assignment 2 Complete
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

@@ -29,9 +29,7 @@ class UnitManager : public Trackable {
 		void LoadSprites (Sprite* ps, Sprite* es);				// Get references for Sprites.
 		void Init ();											// Create the initial enemies.
 		void Clean ();											// Calls the Remove function and deletes the player.
-		int GetEnemyCount ();									// Returns size of _units.
 		KinematicUnit* GetPlayerUnit ();						// Returns _player.
-		std::vector<KinematicUnit*> GetEnemyUnits ();			// Returns _units.
 
 	private:
 		std::vector<KinematicUnit*> _units;		// Vector containing references to all non-player KU's in game.

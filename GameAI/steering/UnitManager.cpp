@@ -61,12 +61,17 @@ void UnitManager::Update (float updateTime, GraphicsBuffer* gb) {
 
 void UnitManager::Clean () {
 	// TODO: Clean this up! (ironic...)
-	for (KinematicUnit* ku : _units) {
-		delete (ku);
+	while (!_units.empty ()) {
+		KinematicUnit* ku = _units.back ();
+		delete ku;
 		ku = NULL;
+		_units.pop_back ();
 	}
+<<<<<<< HEAD
 	//_units.clear ();		
 	
+=======
+>>>>>>> parent of 687f4b9... Assignment 2 Complete
 
 	//delete _player;
 	//_player = NULL;
@@ -83,12 +88,4 @@ void UnitManager::LoadSprites (Sprite* ps, Sprite* es) {
 
 KinematicUnit* UnitManager::GetPlayerUnit () {
 	return _player;
-}
-
-std::vector<KinematicUnit*> UnitManager::GetEnemyUnits () {
-	return _units;
-}
-
-int UnitManager::GetEnemyCount () {
-	return _units.size ();
 }

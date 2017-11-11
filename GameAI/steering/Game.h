@@ -58,8 +58,7 @@ class Game:public Trackable {
 		inline ALLEGRO_FONT* getFont() const { return mpFont; };
 
 		inline KinematicUnit* getPlayerUnit() { return _um -> GetPlayerUnit (); };	// Dependency for steering. ONLY REMOVE IF INTENDING ON CHANGING STEERING MECHANICS.
-		UnitManager* _um;
-
+		
 	private:
 		GraphicsSystem* mpGraphicsSystem;
 		GraphicsBufferManager* mpGraphicsBufferManager;
@@ -86,6 +85,7 @@ class Game:public Trackable {
 		IDType rightWallBufferID;
 		IDType leftWallBufferID;
 
+		UnitManager* _um;
 		InputManager* _im;
 };
 
